@@ -26,8 +26,12 @@ const Header = () => {
           <a className="btn btn-ghost text-xl">Stock Prediction</a>
         </div>
         <div className="navbar-end">
-          <Button text={"Login"} class={"btn-primary mx-2"} />
-          <Button text={"Registration"} class={"btn-primary mx-2"} />
+          <Button text={"Login"} class={"btn-primary mx-2"} url={"login/"} />
+          <Button
+            text={"Registration"}
+            class={"btn-primary mx-2"}
+            url={"registration/"}
+          />
         </div>
       </div>
     </>
