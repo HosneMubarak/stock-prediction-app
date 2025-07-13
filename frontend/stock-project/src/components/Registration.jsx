@@ -23,7 +23,6 @@ const Registration = () => {
       password,
       password1,
     };
-    console.log(formData);
     try {
       const res = await axios.post(
         API_BASE_URL + "auth/registration/",

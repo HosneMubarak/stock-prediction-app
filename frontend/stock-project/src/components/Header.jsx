@@ -1,6 +1,19 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router";
+import { AuthContext } from "../AuthProvider";
 import Button from "./Button";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { isLogedIn, setIslogedIn } = useContext(AuthContext);
+
+  const logoutHandler = () => {
+    setIslogedIn(false);
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    navigate("/login/");
+  };
+
   return (
     <>
       <div className="navbar bg-base-100 shadow-sm">
@@ -26,12 +39,27 @@ const Header = () => {
           <a className="btn btn-ghost text-xl">Stock Prediction</a>
         </div>
         <div className="navbar-end">
-          <Button text={"Login"} class={"btn-primary mx-2"} url={"login/"} />
-          <Button
-            text={"Registration"}
-            class={"btn-primary mx-2"}
-            url={"registration/"}
-          />
+          {isLogedIn ? (
+            <button
+              className="btn btn-error mx-2 text-white"
+              onClick={logoutHandler}
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Button
+                text={"Login"}
+                class={"btn-primary mx-2"}
+                url={"login/"}
+              />
+              <Button
+                text={"Registration"}
+                class={"btn-primary mx-2"}
+                url={"registration/"}
+              />
+            </>
+          )}
         </div>
       </div>
     </>
