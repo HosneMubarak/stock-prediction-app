@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../AuthProvider";
 import Button from "./Button";
 
@@ -36,7 +36,9 @@ const Header = () => {
               </svg>
             </div>
           </div>
-          <a className="btn btn-ghost text-xl">Stock Prediction</a>
+          <Link to={"/"} className="btn btn-ghost text-xl">
+            Stock Prediction
+          </Link>
         </div>
         <div className="navbar-end">
           {isLogedIn ? (

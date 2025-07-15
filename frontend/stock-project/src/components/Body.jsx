@@ -1,8 +1,10 @@
 import { Route, Routes } from "react-router";
+import Dashboard from "./Dashboard";
 import Footer from "./Footer";
 import Header from "./Header";
 import Login from "./Login";
-import Main from "./Main";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRote";
 import Registration from "./Registration";
 
 const Body = () => {
@@ -11,9 +13,30 @@ const Body = () => {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/registration/" element={<Registration />} />
-        <Route path="/login/" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/registration/"
+          element={
+            <PublicRoute>
+              <Registration />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login/"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
       </Routes>
 
       <Footer />
