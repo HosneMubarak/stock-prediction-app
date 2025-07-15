@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../AuthProvider";
 import Button from "./Button";
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLogedIn, setIslogedIn } = useContext(AuthContext);
+  const location = useLocation();
+  const path = location.pathname;
 
   const logoutHandler = () => {
     setIslogedIn(false);
@@ -50,16 +52,20 @@ const Header = () => {
             </button>
           ) : (
             <>
-              <Button
-                text={"Login"}
-                class={"btn-primary mx-2"}
-                url={"login/"}
-              />
-              <Button
-                text={"Registration"}
-                class={"btn-primary mx-2"}
-                url={"registration/"}
-              />
+              {path === "/registration" && (
+                <Button
+                  text={"Login"}
+                  class={"btn-primary mx-2"}
+                  url={"login"}
+                />
+              )}
+              {path === "/login" && (
+                <Button
+                  text={"Registration"}
+                  class={"btn-primary mx-2"}
+                  url={"registration"}
+                />
+              )}
             </>
           )}
         </div>

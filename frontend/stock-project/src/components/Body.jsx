@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Dashboard from "./Dashboard";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -22,7 +22,7 @@ const Body = () => {
           }
         />
         <Route
-          path="/registration/"
+          path="/registration"
           element={
             <PublicRoute>
               <Registration />
@@ -30,13 +30,14 @@ const Body = () => {
           }
         />
         <Route
-          path="/login/"
+          path="/login"
           element={
             <PublicRoute>
               <Login />
             </PublicRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
 
       <Footer />
