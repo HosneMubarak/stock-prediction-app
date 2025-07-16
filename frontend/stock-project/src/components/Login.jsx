@@ -130,7 +130,7 @@ const Login = () => {
             <div className="text-center text-sm mt-2">
               <span className="text-neutral-content">
                 Don't have an account?{" "}
-                <Link to={"/registration/"} className="link link-primary">
+                <Link to={"/registration"} className="link link-primary">
                   Register
                 </Link>
               </span>
