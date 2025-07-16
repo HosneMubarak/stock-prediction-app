@@ -1,3 +1,5 @@
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
@@ -13,9 +15,11 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isLogedIn, setIslogedIn } = useContext(AuthContext);
+  const [showLoading, setShowLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setShowLoading(true);
     const formData = { username, password };
     try {
       const res = await axios.post(API_BASE_URL + "auth/token/", formData);
@@ -28,6 +32,8 @@ const Login = () => {
       setErrorMessage(
         error?.response?.data || "Login failed. Please check your credentials."
       );
+    } finally {
+      setShowLoading(false);
     }
   };
   return (
@@ -106,9 +112,19 @@ const Login = () => {
             </label>
 
             <div className="form-control mt-4">
-              <button type="submit" className="btn btn-primary w-full">
-                Login
-              </button>
+              {showLoading ? (
+                <button
+                  type="submit"
+                  className="btn btn-primary w-full"
+                  disabled
+                >
+                  <FontAwesomeIcon icon={faSpinner} spin /> Please wait
+                </button>
+              ) : (
+                <button type="submit" className="btn btn-primary w-full">
+                  Login
+                </button>
+              )}
             </div>
 
             <div className="text-center text-sm mt-2">

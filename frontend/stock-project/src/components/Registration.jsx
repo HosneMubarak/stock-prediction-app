@@ -1,3 +1,5 @@
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -12,9 +14,11 @@ const Registration = () => {
   const [password, setPassword] = useState("");
   const [password1, setPassword1] = useState("");
   const [errorMessage, setErrorMessage] = useState({});
+  const [showLoading, setShowLoading] = useState(false);
 
   const handleRegistration = async (e) => {
     e.preventDefault();
+    setShowLoading(true);
     const formData = {
       username,
       first_name,
@@ -37,6 +41,8 @@ const Registration = () => {
     } catch (error) {
       console.log(error.response.data);
       setErrorMessage(error.response.data);
+    } finally {
+      setShowLoading(false);
     }
   };
 
@@ -174,9 +180,19 @@ const Registration = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary w-full">
-                Register
-              </button>
+              {showLoading ? (
+                <button
+                  type="submit"
+                  className="btn btn-primary w-full"
+                  disabled
+                >
+                  <FontAwesomeIcon icon={faSpinner} spin /> Please wait
+                </button>
+              ) : (
+                <button type="submit" className="btn btn-primary w-full">
+                  Register
+                </button>
+              )}
             </div>
           </form>
         </div>
