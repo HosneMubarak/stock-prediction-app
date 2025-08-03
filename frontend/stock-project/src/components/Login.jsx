@@ -50,7 +50,7 @@ const Login = () => {
               </label>
               <input
                 type="text"
-                placeholder="Username or Email"
+                placeholder="Username"
                 className="input input-bordered w-full"
                 name="username"
                 value={username}
